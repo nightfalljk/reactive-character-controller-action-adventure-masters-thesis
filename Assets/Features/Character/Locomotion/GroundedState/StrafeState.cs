@@ -60,7 +60,6 @@ namespace Features.Character.Locomotion
 
         public override void Tick(float deltaTime)
         {
-            //TODO: RESTRICT THIS ROTATION HORIZONTALLY; MAYBE ADD MOVING ARM FOR AIM OR SOMETHING?
             if(_currentViewTransform != null)
                 _stateMachine.Avatar.rotation = Quaternion.Lerp(_stateMachine.Avatar.rotation,
                     Quaternion.LookRotation(_currentViewTransform.forward), deltaTime * 10);

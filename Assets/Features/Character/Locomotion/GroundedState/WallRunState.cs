@@ -19,12 +19,12 @@ namespace Features.Character.Locomotion
             _disposables = new CompositeDisposable();
             _stateMachine.LockOtherStateMachines();
             _stateMachine.Animator.CrossFadeInFixedTime(_wallClimbRunAnim, 0.0f);
-            _stateMachine.MovementResolver.enabled = false;
+            //_stateMachine.MovementResolver.enabled = false;
             AnimationMatchEndPositionTarget();
 
             _stateMachine.SensorSystem.AnimationFinished.Subscribe(_ =>
             {
-                _stateMachine.SwitchState((int)_stateMachine.PreviousState);
+                _stateMachine.SwitchState((int) LocomotionStates.Idle);
             }).AddTo(_disposables);
 
         }
@@ -36,8 +36,11 @@ namespace Features.Character.Locomotion
 
         public override void Exit()
         {
-            _disposables.Dispose();
+            _stateMachine.MovementResolver.enabled = false;
+            _stateMachine.transform.position = _stateMachine.SensorSystem.ObstacleInteractionEndPos.Value;
             _stateMachine.MovementResolver.enabled = true;
+            _disposables.Dispose();
+            
             _stateMachine.UnlockOtherStateMachines();
         }
         

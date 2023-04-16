@@ -23,8 +23,6 @@ namespace Features.Character.Locomotion
         private bool _stopping;
         private bool _turning;
         
-        //TODO: CHANGE MOVE SPEED ANIM VAL TO 0-1 THEN CONVERT BASED ON MAX MOVE SPEED TO SET VALUE (MORE FLEXIBLE)
-        //TODO: REMOVE ACCELERATION
         private readonly int _runAnimHash = Animator.StringToHash("BasicLocomotion");
         private readonly int _moveSpeedAnimHash = Animator.StringToHash("MoveSpeed");
         private readonly int _runTurn = Animator.StringToHash("Running Turn 180");
@@ -32,6 +30,8 @@ namespace Features.Character.Locomotion
         private readonly int _runStop = Animator.StringToHash("Run To Stop");
         private readonly int _walkStop = Animator.StringToHash("Stop Walking");
         private readonly int _sprintStart = Animator.StringToHash("Idle To Sprint");
+
+        private float _speedPercentage = 1;
             
         
 
@@ -87,7 +87,9 @@ namespace Features.Character.Locomotion
                     if (!_sprinting)
                     {
                         var runSpeed = _stateMachine.LocomotionConfig.runSpeed;
-                        _currentMaxSpeed = Mathf.Min( runSpeed * inputVelocity.magnitude, runSpeed);
+                        _speedPercentage = Mathf.Min(inputVelocity.magnitude, 1);
+                        
+                        _currentMaxSpeed = runSpeed * _speedPercentage;
                     }
                     _currentMoveVec = (new Vector3(inputVelocity.x, 0, inputVelocity.y)).normalized;
 
@@ -187,7 +189,6 @@ namespace Features.Character.Locomotion
             var moveVec = CalculateMoveVec();
             if(!_starting)
                 _stateMachine.MovementResolver.Move(moveVec, _currentMoveSpeed, deltaTime);
-            //TODO: ROTATION BASED ON MOVE SPEED -> LESS ROTATE WHEN FAST
             _stateMachine.Avatar.rotation = Quaternion.Lerp(_stateMachine.Avatar.rotation,
                 Quaternion.LookRotation(moveVec), deltaTime * 10);
             
@@ -196,7 +197,11 @@ namespace Features.Character.Locomotion
 
         private void CalculateMoveSpeed(float deltaTime)
         {
-            float acceleration = _stateMachine.LocomotionConfig.acceleration;
+
+            _currentMoveSpeed = Mathf.MoveTowards(_currentMoveSpeed, _currentMaxSpeed,
+                _stateMachine.LocomotionConfig.acceleration * deltaTime);
+            
+            /*float acceleration = _stateMachine.LocomotionConfig.acceleration;
             if (_currentMoveSpeed <= _currentMaxSpeed)
             {
                 _currentMoveSpeed = Mathf.Min(_currentMoveSpeed + acceleration * deltaTime, _currentMaxSpeed);
@@ -204,7 +209,7 @@ namespace Features.Character.Locomotion
             else
             {
                 _currentMoveSpeed = Mathf.Max(_currentMoveSpeed - acceleration * deltaTime, _currentMaxSpeed);
-            }
+            }*/
         }
 
         private Vector3 CalculateMoveVec()

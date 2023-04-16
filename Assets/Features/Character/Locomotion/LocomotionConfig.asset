@@ -16,10 +16,10 @@ MonoBehaviour:
   runSpeed: 6
   sprintSpeed: 9
   crouchSpeed: 3
-  acceleration: 5
+  acceleration: 20
   strafeSpeed: 3
-  groundedThreshold: 0.5
-  airSpeed: 4
+  groundedThreshold: 0.01
+  airSpeed: 6
   deadlyFallHeight: 6
   rollLandingFallHeight: 4
   heavyLandingFallHeight: 2

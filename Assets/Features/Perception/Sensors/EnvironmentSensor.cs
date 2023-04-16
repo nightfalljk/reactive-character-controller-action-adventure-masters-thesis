@@ -17,8 +17,8 @@ namespace Features.Perception.Sensors
         [SerializeField] private float detectionRange;
         [SerializeField] private float detectionRadius;
         
-        [SerializeField] private Transform closeCliffDetector;
-        [SerializeField] private Transform farCliffDetector;
+        //[SerializeField] private Transform closeCliffDetector;
+        //[SerializeField] private Transform farCliffDetector;
         
         private ReactiveProperty<bool> _interactableInView;
         private IInteractable _currentInteractable;
@@ -134,7 +134,7 @@ namespace Features.Perception.Sensors
             {
                 //TODO: Target distances based on movespeed
                 //TODO: Cast Distance based on movespeed 
-                //TODO: Put this in a class
+
                 Vector3 characterPosition = transform.position;
                 Vector3 obstacleTraverseDirection = -obstacleHit.normal * 0.5f;
 
@@ -146,7 +146,7 @@ namespace Features.Perception.Sensors
                 //Max vault height cast
                 
                 
-                if (Physics.Raycast(traverseOrigin, obstacleTraverseDirection, out var obstacleCast, 2, obstacleLayer))
+                if (Physics.Raycast(traverseOrigin, obstacleTraverseDirection, out var obstacleCast, 3, obstacleLayer))
                 {
                     Debug.Log("Hit wall");
                     //TODO: Check height of wall and climb up if close enough

@@ -35,7 +35,10 @@ namespace Features.Character.Locomotion
         {
             _momentum = _stateMachine.SensorSystem.CharacterForward.Value;
             _momentum.y = 0;
-            _stateMachine.MovementResolver.Move(_momentum, _stateMachine.SensorSystem.MoveSpeed.Value, deltaTime);
+            var speed = _stateMachine.PreviousState == LocomotionStates.Idle
+                ? 0
+                : _stateMachine.LocomotionConfig.airSpeed;
+            _stateMachine.MovementResolver.Move(_momentum, speed, deltaTime);
         }
 
         public override void Exit()

@@ -26,7 +26,7 @@ namespace Features.Character.Locomotion
 
             _stateMachine.SensorSystem.AnimationFinished.Subscribe(_ =>
             {
-                _stateMachine.SwitchState((int)_stateMachine.PreviousState);
+                _stateMachine.SwitchState((int)LocomotionStates.Idle);
             }).AddTo(_disposables);
         }
 
