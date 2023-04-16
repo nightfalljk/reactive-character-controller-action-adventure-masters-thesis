@@ -3518,6 +3518,14 @@ PrefabInstance:
       propertyPath: AimTargetReticle
       value: 
       objectReference: {fileID: 1698655712}
+    - target: {fileID: 850074386519142673, guid: b492220dc1e7db34faf5f91b2ac12210, type: 3}
+      propertyPath: CameraDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 850074386535397430, guid: b492220dc1e7db34faf5f91b2ac12210, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.0998144
+      objectReference: {fileID: 0}
     - target: {fileID: 850074387369370545, guid: b492220dc1e7db34faf5f91b2ac12210, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
@@ -3565,6 +3573,10 @@ PrefabInstance:
     - target: {fileID: 850074387369370550, guid: b492220dc1e7db34faf5f91b2ac12210, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 850074387496900192, guid: b492220dc1e7db34faf5f91b2ac12210, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.0998144
       objectReference: {fileID: 0}
     - target: {fileID: 8755986055978347610, guid: b492220dc1e7db34faf5f91b2ac12210, type: 3}
       propertyPath: crossHair
